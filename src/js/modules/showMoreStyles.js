@@ -12,8 +12,8 @@ const showMoreStyles=(trigger, wrapper)=>{
     //     btn.remove()
     // })
     btn.addEventListener("click", function(){
-        getData('http://localhost:3000/styles')
-        .then(res=>createCard(res))
+        getData('assets/db.json')
+        .then(res=>createCard(res.styles))
         .then(()=>this.remove())
         .catch(e=>console.log(e))
         
