@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
     mask('[name="phone"]')
     checkInputText('[name="name"]')
     checkInputText('[name="message"]')
-    showMoreStyles(".button-styles", ".styles-2")
+    showMoreStyles(".button-styles", "#styles .row")
 
 
 })

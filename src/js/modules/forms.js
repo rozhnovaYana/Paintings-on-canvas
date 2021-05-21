@@ -1,4 +1,5 @@
 // import inputForNum from "./inputForNum"
+import {postData} from "../services/requests"
 const forms=()=>{
     const allForms=document.querySelectorAll("form"),
     allInputs=document.querySelectorAll("input"),
@@ -25,13 +26,7 @@ const forms=()=>{
         question:"assets/question.php"
     }
     // inputForNum(inputNumber)
-    const formHandler=async (url, data)=>{
-        const res=await fetch(url, {
-            method:"POST",
-            body:data
-        })
-        return await res.text()
-    }
+   
 
     const clearInputs=()=>{
         allInputs.forEach(input=>{
@@ -63,7 +58,7 @@ const forms=()=>{
             let api;
             form.closest(".popup-design")?api=path.designer:api=path.question
             const data=new FormData(form)
-            formHandler(api, data)
+            postData(api, data)
             .then((data)=>{
                 statusImg.setAttribute("src", massages.ok)
                 statusText.textContent=massages.done
