@@ -1,0 +1,26 @@
+.fading{
+    animation: fadeInUp 1s forwards;
+    position: absolute;
+    left: 0;
+    
+}
+@keyframes fadeInUp {
+    0%{
+        opacity: 1;
+        transform: translateY(0);
+
+        
+    }
+    100%{
+        transform: translateY(200%);
+        opacity: 0;
+
+
+    }
+}
+.popup-content{
+    overflow: hidden;
+}
+.status{
+    text-align: center;
+  }
