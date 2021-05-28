@@ -1,6 +1,6 @@
 // import inputForNum from "./inputForNum"
 import {postData} from "../services/requests"
-const forms=()=>{
+const forms=(state)=>{
     const allForms=document.querySelectorAll("form"),
     allInputs=document.querySelectorAll("input"),
     upload=document.querySelectorAll('[name="upload"]')
@@ -11,6 +11,7 @@ const forms=()=>{
             let dots;
             arrayFromFileName[0].length>10?dots="...":dots="."
             input.previousElementSibling.textContent=arrayFromFileName[0].substring(0, 10)+dots+arrayFromFileName[1]
+            state.img=input.files[0].name
         })
     })
     const massages={
@@ -58,11 +59,16 @@ const forms=()=>{
             let api;
             form.closest(".popup-design")?api=path.designer:api=path.question
             const data=new FormData(form)
+            if(form.id==="calc"){
+                for(let keys in state){
+                    data.append(keys, state[keys])
+                }
+            }
+            
             postData(api, data)
             .then((data)=>{
                 statusImg.setAttribute("src", massages.ok)
                 statusText.textContent=massages.done
-
             }).catch(()=>{
                 statusImg.setAttribute("src", massages.failed)
                 statusText.textContent=massages.failed
@@ -72,7 +78,10 @@ const forms=()=>{
                     statusDiv.remove()
                     form.classList.remove("fading")
                     form.classList.add("animated", "fadeInDown")
-                    form.closest("[data-modal]").style.display="none"
+                    try{
+                        form.closest("[data-modal]").style.display="none"
+                    }catch{}
+                    
                     document.body.style.overflow = ""
                 }, 5000)
             })
